@@ -1,19 +1,24 @@
 // REACT COMPONENTS
 import React, { useEffect } from "react";
 // REACT NATIVE COMPONENTS
-import {Platform, StatusBar} from 'react-native';
+import {Platform,
+    StatusBar,
+} from 'react-native';
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import 'react-native-gesture-handler';
 // EXPO COMPONENT
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 // MY PAGE
 import Menu from './Menu'
-import {ThemeProvider, useData} from "../hooks";
+import Auth from "./Auth";
+
 // MY HOOKS
-// import {useData, ThemeProvider, TranslationProvider} from '../hooks';
+import {AuthProvider, ThemeProvider, useData} from "../hooks";
 
 SplashScreen.preventAutoHideAsync().then(()=>console.log("Preventing hide SplashScreen"))
+const Stack = createNativeStackNavigator()
 
 export default function Main() {
     const {isDark, theme, setTheme} = useData()
@@ -61,9 +66,19 @@ export default function Main() {
 
     return (
         <ThemeProvider theme={theme} setTheme={setTheme}>
-            <NavigationContainer theme={navigationTheme}>
-                <Menu/>
-            </NavigationContainer>
+            <AuthProvider>
+                <NavigationContainer  theme={navigationTheme}>
+                    <Stack.Navigator
+                        initialRouteName={"Auth"}
+                        screenOptions={{
+                            headerShown: false
+                        }}
+                    >
+                        <Stack.Screen name="Auth" component={Auth} />
+                        <Stack.Screen name="App" component={Menu} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </AuthProvider>
         </ThemeProvider>
 
     );

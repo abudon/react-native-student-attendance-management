@@ -28,3 +28,16 @@ export interface IUseData {
     handleUsers: (data?: IUser[]) => void;
 
 }
+
+export interface ILogIn {
+    userid: string,
+    password: string,
+    role?: string
+}
+
+export interface ILoginValidation {
+    userid: boolean,
+    password: boolean,
+    role?: boolean
+
+}

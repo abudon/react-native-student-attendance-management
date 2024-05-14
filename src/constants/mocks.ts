@@ -75,5 +75,4 @@ export const USERS: IUser[] = [
 
 export default {
     USERS,
-};
-
+}
