@@ -75,7 +75,7 @@ export default function Main() {
                         }}
                     >
                         <Stack.Screen name="Auth" component={Auth} />
-                        <Stack.Screen name="App" component={Menu} />
+                        <Stack.Screen name="Menu" component={Menu} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </AuthProvider>

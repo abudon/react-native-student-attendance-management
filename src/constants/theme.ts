@@ -78,36 +78,36 @@ export const ASSETS: ThemeAssets = {
     OpenSansBold: require('../assets/fonts/OpenSans-Bold.ttf'),
 
     // backgrounds/logo
-    logo: require('../assets/images/logo.png'),
-    header: require('../assets/images/header.png'),
-    background: require('../assets/images/background.png'),
-    ios: require('../assets/images/ios.png'),
-    android: require('../assets/images/android.png'),
+    // logo: require('../assets/images/logo.png'),
+    // header: require('../assets/images/header.png'),
+    // background: require('../assets/images/background.png'),
+    // ios: require('../assets/images/ios.png'),
+    // android: require('../assets/images/android.png'),
 
     // cards
-    card1: require('../assets/images/card1.png'),
-    card2: require('../assets/images/card2.png'),
-    card3: require('../assets/images/card3.png'),
-    card4: require('../assets/images/card4.png'),
-    card5: require('../assets/images/card5.png'),
+    // card1: require('../assets/images/card1.png'),
+    // card2: require('../assets/images/card2.png'),
+    // card3: require('../assets/images/card3.png'),
+    // card4: require('../assets/images/card4.png'),
+    // card5: require('../assets/images/card5.png'),
 
     // gallery photos
-    photo1: require('../assets/images/photo1.png'),
-    photo2: require('../assets/images/photo2.png'),
-    photo3: require('../assets/images/photo3.png'),
-    photo4: require('../assets/images/photo4.png'),
-    photo5: require('../assets/images/photo5.png'),
-    photo6: require('../assets/images/photo6.png'),
-    carousel1: require('../assets/images/carousel1.png'),
+    // photo1: require('../assets/images/photo1.png'),
+    // photo2: require('../assets/images/photo2.png'),
+    // photo3: require('../assets/images/photo3.png'),
+    // photo4: require('../assets/images/photo4.png'),
+    // photo5: require('../assets/images/photo5.png'),
+    // photo6: require('../assets/images/photo6.png'),
+    // carousel1: require('../assets/images/carousel1.png'),
 
     // avatars
-    avatar1: require('../assets/images/avatar1.png'),
-    avatar2: require('../assets/images/avatar2.png'),
+    // avatar1: require('../assets/images/avatar1.png'),
+    // avatar2: require('../assets/images/avatar2.png'),
 
     // cars
-    x5: require('../assets/images/x5.png'),
-    gle: require('../assets/images/gle.png'),
-    tesla: require('../assets/images/tesla.png'),
+    // x5: require('../assets/images/x5.png'),
+    // gle: require('../assets/images/gle.png'),
+    // tesla: require('../assets/images/tesla.png'),
 };
 
 export const FONTS: ThemeFonts = {

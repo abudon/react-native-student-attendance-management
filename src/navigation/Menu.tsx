@@ -1,19 +1,7 @@
-// REACT NATIVE COMPONENT
-import {View, Image} from "react-native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {
-    DrawerItemList,
-    createDrawerNavigator, DrawerContentComponentProps,
-} from "@react-navigation/drawer";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 // @ts-ignore
 import Icon from 'react-native-vector-icons/Ionicons';
-// EXPO COMPONENT
-import {SimpleLineIcons} from "@expo/vector-icons";
-
 // MY COMPONENTS
-
-import {Text, Images, Blocks} from '../components'
 // MY ASSEST
 // @ts-ignore
 import User from "../assets/images/avatar1.png";
@@ -21,17 +9,43 @@ import {useTheme, useAuth} from "../hooks";
 import AdminNavigation from "./AdminNavigation";
 import TeacherNavigation from "./TeacherNavigation";
 import StudentNavigation from "./StudentNavigation";
-
-
+import {usePushNotification} from "../constants/data/usePushNotification";
+// FIREBASE DATABASE
+import {database} from "../utils/firebaseConfig";
+import {ref, update} from "firebase/database";
+import {useEffect} from "react";
 
 
 // ASSIGN FUNCTIONS
-const Drawer = createDrawerNavigator()
 const Tab = createBottomTabNavigator()
+
+const updateUserDevice = (userId : string, deviceToken : string) => {
+    const sanitizedUserId = userId.toLowerCase();
+    const sanitizedDeviceToken = deviceToken.replace(/[.#$/[\]]/g, '_');
+    const userDeviceRef = ref(database, `usersDevices/${sanitizedUserId}/devices/${sanitizedDeviceToken}`);
+
+    update(userDeviceRef, { token: deviceToken })
+        .then(() => {
+            console.log('Device token saved for user:', userId);
+        })
+        .catch((error) => {
+            console.error('Error saving device token:', error);
+        });
+}
 
 const Menu = () => {
     const { colors} = useTheme();
     const user = useAuth()
+    const {expoPushToken, notification} = usePushNotification()
+    const data = JSON.stringify(notification, undefined, 2)
+    console.log(data )
+    console.log(expoPushToken?.data)
+    useEffect(() => {
+        if (user && expoPushToken){
+            updateUserDevice(user.userid, expoPushToken.data)
+        }
+    }, [user, expoPushToken]);
+
 
     return(
         <Tab.Navigator
@@ -43,9 +57,9 @@ const Menu = () => {
                 }
             }}
         >
-            {user.role === 'student' && <Tab.Screen name="Student" component={StudentNavigation} />}
-            {user.role === 'teacher' && <Tab.Screen name="Teacher" component={TeacherNavigation} />}
-            {user.role === 'admin' && <Tab.Screen name="Admin" component={AdminNavigation} />}
+            {user?.role === 'student' && <Tab.Screen name="Student" component={StudentNavigation} />}
+            {user?.role === 'staff' && <Tab.Screen name="Teacher" component={TeacherNavigation} />}
+            {user?.role === 'admin' && <Tab.Screen name="Admin" component={AdminNavigation} />}
         </Tab.Navigator>
     )
 }

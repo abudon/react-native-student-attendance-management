@@ -6,6 +6,7 @@ import Modal from './Modal';
 import Switch from './Switch';
 import Checkboxes from './Checkboxes';
 import Images from './Images';
+import Divider from "./Divider";
 
 export {
   Blocks,
@@ -16,4 +17,5 @@ export {
   Checkboxes,
   Images,
   Modal,
+    Divider
 };

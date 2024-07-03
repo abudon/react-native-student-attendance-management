@@ -10,7 +10,9 @@ export const AuthContext = createContext<IAuthContext>({
     user: {
         userid: '',
         password: '',
-        role: ""
+        role: "",
+        grade: '',
+        department: ''
     },
     setUser: () => {}
 });
@@ -23,7 +25,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<ILogIn>({
         userid: '',
         password: '',
-        role: ""
+        role: "",
+        grade: "",
+        department: ""
     });
 
     return (

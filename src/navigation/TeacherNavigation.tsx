@@ -1,24 +1,29 @@
 // REACT NATIVE COMPONENT
-import {View, Image} from "react-native";
+import {View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {
     DrawerItemList,
-    createDrawerNavigator, DrawerContentComponentProps,
+    createDrawerNavigator,
 } from "@react-navigation/drawer";
 // @ts-ignore
 import Icon from 'react-native-vector-icons/Ionicons';
 // EXPO COMPONENT
-import {SimpleLineIcons} from "@expo/vector-icons";
+import {MaterialCommunityIcons, MaterialIcons, Octicons} from "@expo/vector-icons";
 
 // MY COMPONENTS
 
-import {Text, Images, Blocks} from '../components'
+import {Text, Images} from '../components'
 // MY ASSEST
 // @ts-ignore
 import User from "../assets/images/avatar1.png";
-import {useTheme} from "../hooks";
+import {useAuth, useTheme} from "../hooks";
 import {route} from "../constants";
-import {TeacherDashboard} from "../screens";
+import {Analytics, Dashboard, TeacherTimetable, StudentsReport, Logout} from "../screens";
+import {useUsers} from "../constants/data";
+import {useEffect, useState} from "react";
+import {IFIreBaseUsers} from "../constants/types";
+
+
 
 
 
@@ -29,6 +34,18 @@ const Drawer = createDrawerNavigator()
 const TeacherNavigation = () => {
 
     const { colors} = useTheme()
+    const {users} = useUsers()
+    const {userid} = useAuth()
+    const [person, setPerson] = useState<IFIreBaseUsers>();
+
+    useEffect(() => {
+        if (users && userid){
+            const user = users.find(user=> user.userid.toLowerCase() === userid.toLowerCase());
+            setPerson(user)
+        }
+
+
+    }, [users, userid]);
 
     return(
         <Drawer.Navigator
@@ -54,7 +71,7 @@ const TeacherNavigation = () => {
         }}
         />
         <Text
-        primary={true}
+        tertiary
         h5
         style={{
             fontSize: 22,
@@ -62,13 +79,13 @@ const TeacherNavigation = () => {
                 fontWeight: "bold",
                 color: "#111"
         }}
-    >Abraham Abudon </Text>
+    >{person?.fullname}</Text>
         <Text
         style={{
             fontSize: 16,
                 color: "#111"
         }}
-    >Software Engineer</Text>
+    >{person?.subjectTaught == '' || undefined ? 'Grade: '+person?.grade : person?.subjectTaught}</Text>
         </View>
         <DrawerItemList {...props} />
         </SafeAreaView>
@@ -77,13 +94,13 @@ const TeacherNavigation = () => {
 
     screenOptions={( {navigation}) => ({
         headerStyle: {
-            backgroundColor: "#005f33",
+            backgroundColor: colors.success,
         },
         headerTintColor: "#fff",
         headerTitleStyle: {
             fontWeight: "bold",
             fontStyle: "italic",
-            fontSize: 32
+            fontSize: 26
 
         },
         headerRight: () => (
@@ -107,8 +124,48 @@ const TeacherNavigation = () => {
 })}
 >
 
+    <Drawer.Screen
+        options={{
+            drawerIcon: () => (
+                <MaterialCommunityIcons name={"view-dashboard"} size={23} color={colors.gray}/>
+            )
+        } }
+        name={route.TeacherDashboard}
+        component={Dashboard} />
+    <Drawer.Screen
+        options={{
+            drawerIcon: () => (
+                <MaterialIcons name={"analytics"} size={23} color={colors.gray}/>
+            )
+        } }
+        name={route.Analytics}
+        component={Analytics} />
+    <Drawer.Screen
+        options={{
+            drawerIcon: () => (
+                <MaterialCommunityIcons name={"timetable"} size={23} color={colors.gray}/>
+            )
+        } }
+        name={route.Timetable}
+        component={TeacherTimetable} />
+    <Drawer.Screen
+        options={{
+            drawerIcon: () => (
+                <Octicons name={"report"} size={23} color={colors.gray}/>
+            )
+        } }
+        name={route.IndividualStudentRecord}
+        component={StudentsReport} />
 
-    <Drawer.Screen name={route.TeacherDashboard} component={TeacherDashboard} />
+        <Drawer.Screen
+                options={{
+                    drawerIcon: () => (
+                        <MaterialCommunityIcons name={"logout"} size={23} color={colors.gray}/>
+                    )
+                } }
+                name={route.Logout}
+                component={Logout}/>
+
 
     </Drawer.Navigator>
 )

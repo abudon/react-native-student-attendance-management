@@ -1,24 +1,26 @@
 // REACT NATIVE COMPONENT
-import {View, Image} from "react-native";
+import {View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
+import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 import {
     DrawerItemList,
-    createDrawerNavigator, DrawerContentComponentProps,
+    createDrawerNavigator
 } from "@react-navigation/drawer";
 // @ts-ignore
 import Icon from 'react-native-vector-icons/Ionicons';
-// EXPO COMPONENT
-import {SimpleLineIcons} from "@expo/vector-icons";
 
 // MY COMPONENTS
 
-import {Text, Images, Blocks} from '../components'
+import {Text, Images} from '../components'
 // MY ASSEST
 // @ts-ignore
-import User from "../assets/images/avatar1.png";
-import {useTheme} from "../hooks";
+import Avatar from "../assets/images/avatar1.png";
+import {useAuth, useTheme} from "../hooks";
 import {route} from "../constants";
-import {StudentDashboard} from "../screens";
+import {Announcement, Logout, StudentDashboard, Timetable} from "../screens";
+import {useUsers} from "../constants/data";
+import {useEffect, useState} from "react";
+import {IFIreBaseUsers} from "../constants/types";
 
 
 
@@ -29,6 +31,20 @@ const Drawer = createDrawerNavigator()
 const StudentNavigation = () => {
 
     const { colors} = useTheme()
+    const {users} = useUsers()
+    const {userid} = useAuth()
+    const [person, setPerson] = useState<IFIreBaseUsers>();
+
+    useEffect(() => {
+        if (users && userid){
+            const user = users.find(user=> user.userid.toLowerCase() === userid.toLowerCase());
+            setPerson(user)
+        }
+
+
+    }, [users, userid]);
+
+
 
     return(
         <Drawer.Navigator
@@ -46,11 +62,10 @@ const StudentNavigation = () => {
         }}
     >
         <Images
-            source={User}
+            source={Avatar}
         style={{
             height: 80,
-                width: 80,
-                borderRadius: 50
+            width: 80,
         }}
         />
         <Text
@@ -62,13 +77,15 @@ const StudentNavigation = () => {
                 fontWeight: "bold",
                 color: "#111"
         }}
-    >Abraham Abudon </Text>
+    >{person?.fullname} </Text>
         <Text
+            bold
         style={{
-            fontSize: 16,
-                color: "#111"
+            fontSize: 20,
+            color: "#111",
+            fontWeight: 'bold'
         }}
-    >Software Engineer</Text>
+    >Grade: {person?.grade}</Text>
         </View>
         <DrawerItemList {...props} />
         </SafeAreaView>
@@ -77,13 +94,13 @@ const StudentNavigation = () => {
 
     screenOptions={( {navigation}) => ({
         headerStyle: {
-            backgroundColor: "#005f33",
+            backgroundColor: colors.success,
         },
         headerTintColor: "#fff",
         headerTitleStyle: {
             fontWeight: "bold",
             fontStyle: "italic",
-            fontSize: 32
+            fontSize: 26
 
         },
         headerRight: () => (
@@ -103,12 +120,44 @@ const StudentNavigation = () => {
         drawerStyle: {
         backgroundColor: "#fff",
             width: 250
-    }
+    },
 })}
 >
 
 
-    <Drawer.Screen name={route.StudentDashboard} component={StudentDashboard} />
+            <Drawer.Screen
+                options={{
+                    drawerIcon: () => (
+                        <MaterialCommunityIcons name={"view-dashboard"} size={23} color={colors.gray}/>
+                    )
+                } }
+                name={route.StudentDashboard}
+                component={StudentDashboard}/>
+            <Drawer.Screen
+                options={{
+                    drawerIcon: () => (
+                        <MaterialIcons name={"announcement"} size={23} color={colors.gray}/>
+                    )
+                } }
+                name={route.Announcement}
+                component={Announcement}/>
+            <Drawer.Screen
+                options={{
+                    drawerIcon: () => (
+                        <MaterialCommunityIcons name={"timetable"} size={23} color={colors.gray}/>
+                    )
+                } }
+                name={route.Timetable}
+                component={Timetable}/>
+
+            <Drawer.Screen
+                options={{
+                    drawerIcon: () => (
+                        <MaterialCommunityIcons name={"logout"} size={23} color={colors.gray}/>
+                    )
+                } }
+                name={route.Logout}
+                component={Logout}/>
 
     </Drawer.Navigator>
 )

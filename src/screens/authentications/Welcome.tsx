@@ -12,7 +12,7 @@ type navigationType = {
 
 
 const Welcome: React.FC<navigationType> = ({navigation}) => {
-    const {gradients} = useTheme()
+    const {sizes} = useTheme()
     return(
         <Blocks
             safe
@@ -31,7 +31,7 @@ const Welcome: React.FC<navigationType> = ({navigation}) => {
             >
                 <Blocks
                 blur
-                intensity={60}
+                intensity={40}
                 radius={10}
                 style={{
                     flex: 1,
@@ -39,7 +39,7 @@ const Welcome: React.FC<navigationType> = ({navigation}) => {
                     width: '100%',
                     height: '100%',
                 }}
-                tint={"dark"}
+                tint={"light"}
                 >
                 <Images
                     source={require("../../assets/images/new/calender.png")}
@@ -51,9 +51,9 @@ const Welcome: React.FC<navigationType> = ({navigation}) => {
                         top: "50%",
                         left: '50%',
                         transform: [
-                            {translateX: -200},
+                            {translateX: -150},
                             {translateY: -80},
-                            {rotate: "-4deg"}
+                            {rotate: "-4.5deg"}
                         ]
                     }}
                 >
@@ -64,36 +64,55 @@ const Welcome: React.FC<navigationType> = ({navigation}) => {
                                 flex: 1,
                             position: 'absolute',
                             top: '.5%',
-                            right: ".5%",
-                            width: 200,
-                            height: 200
+                            right: "-3.5%",
+                            width: 150,
+                            height: 150
 
                         }}
                         source={require("../../assets/images/new/New-Logo-2-removebg-preview-300x300.png")}>
                     </Images>
                     <Blocks
                         paddingRight={10}
-
+                        style={{
+                            width:"70%"
+                        }}
                     >
                         <Text
                             h2
                             color={'#008000'}
                             style={styles.headingText}
-                            paddingLeft={10}
+                            paddingLeft={3}
                             bold
+                            weight={'900'}
                         >
-                            FORTVILLE ACADEMY
+                            FORTVILLE
+
                         </Text>
                         <Text
-                            h3
-                            color={"#df7040"}
-                            style={{...styles.headingText,
-                            width: "60%"}}
-                            paddingLeft={10}
-
-
+                            h2
+                            color={'#008000'}
+                            style={styles.headingText}
+                            paddingLeft={3}
+                            bold
+                            weight={'900'}
                         >
-                            ATTENDANCE SYSTEM
+                            ACADEMY
+                        </Text>
+                        <Text
+                            h4
+                            color={"#df7040"}
+                            style={{...styles.headingText}}
+                            paddingLeft={5}
+                        >
+                            ATTENDANCE
+                        </Text>
+                        <Text
+                            h4
+                            color={"#df7040"}
+                            style={{...styles.headingText}}
+                            paddingLeft={5}
+                        >
+                            SYSTEM
                         </Text>
                     </Blocks>
 
@@ -125,7 +144,6 @@ const styles = StyleSheet.create({
 headingText: {
     position: "relative",
     zIndex: 1,
-    fontSize: 24,
     fontStyle: 'italic'
 
 }

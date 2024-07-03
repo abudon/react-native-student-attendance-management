@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools:dvlib:31.1.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools" artifactId="dvlib" version="31.1.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/31.1.1/73f9e701a49ce55a5efc5ade01238f5fa9b2655d/dvlib-31.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/31.1.1/16569fd826cf4ad54bf119fc549a39ebeaf88a07/dvlib-31.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

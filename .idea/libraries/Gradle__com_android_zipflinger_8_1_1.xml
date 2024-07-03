@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android:zipflinger:8.1.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android" artifactId="zipflinger" version="8.1.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android/zipflinger/8.1.1/b450a19b332659b4190f0af34bc734a7e21d464e/zipflinger-8.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android/zipflinger/8.1.1/7f674186ad2715ddc744771ad3e29957a33c291b/zipflinger-8.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
