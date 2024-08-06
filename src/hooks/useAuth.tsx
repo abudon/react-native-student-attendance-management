@@ -38,6 +38,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 };
 
 export const useAuth = (): ILogIn => {
-    const { user, setUser } = useContext(AuthContext);
+    const { user} = useContext(AuthContext);
     return user;
 };

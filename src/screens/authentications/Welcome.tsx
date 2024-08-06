@@ -12,7 +12,7 @@ type navigationType = {
 
 
 const Welcome: React.FC<navigationType> = ({navigation}) => {
-    const {sizes} = useTheme()
+
     return(
         <Blocks
             safe

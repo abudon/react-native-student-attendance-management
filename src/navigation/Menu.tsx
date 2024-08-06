@@ -19,8 +19,12 @@ import {useEffect} from "react";
 // ASSIGN FUNCTIONS
 const Tab = createBottomTabNavigator()
 
-const updateUserDevice = (userId : string, deviceToken : string) => {
-    const sanitizedUserId = userId.toLowerCase();
+const updateUserDevice = (userId: string, deviceToken : string) => {
+    let sanitizedUserId = userId.toLowerCase();
+    // Split userId at "@" symbol and use the first part
+    if (sanitizedUserId.includes('@')) {
+        sanitizedUserId = sanitizedUserId.split('@')[0];
+    }
     const sanitizedDeviceToken = deviceToken.replace(/[.#$/[\]]/g, '_');
     const userDeviceRef = ref(database, `usersDevices/${sanitizedUserId}/devices/${sanitizedDeviceToken}`);
 
@@ -32,7 +36,6 @@ const updateUserDevice = (userId : string, deviceToken : string) => {
             console.error('Error saving device token:', error);
         });
 }
-
 const Menu = () => {
     const { colors} = useTheme();
     const user = useAuth()

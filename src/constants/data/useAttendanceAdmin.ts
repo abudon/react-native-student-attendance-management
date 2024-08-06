@@ -100,7 +100,7 @@ const useAttendanceAdmin = () => {
                 const attendanceDate = attend.time.split(" ").splice(1, 3).join(" ")
                 //STAFF TIME
                 const attendanceTime = attend.time.split(" ").splice(4).join(" ")
-                const [hours, minute] = attendanceTime.split(":");
+                const [hours, ] = attendanceTime.split(":");
 
 
                 return attendanceDate === formattedToday &&
@@ -115,7 +115,7 @@ const useAttendanceAdmin = () => {
                 const attendanceDate = attend.time.split(" ").splice(1, 3).join(" ")
                 //STAFF TIME
                 const attendanceTime = attend.time.split(" ").splice(4).join(" ")
-                const [hours, minute] = attendanceTime.split(":");
+                const [hours, ] = attendanceTime.split(":");
 
 
                 return attendanceDate === formattedToday &&
@@ -125,7 +125,7 @@ const useAttendanceAdmin = () => {
             });
 
             if (allLateStaff && totalStaffs){
-                setLateStaffNumber(prev=>allLateStaff?.length)
+                setLateStaffNumber(allLateStaff?.length)
             }
             if (allLateStudent){
                 setLateStudentNumber(allLateStudent.length)
@@ -362,7 +362,6 @@ const useAttendanceAdmin = () => {
                 return {
                     value: newValue,
                     label: `${day}`,
-                    frontColor: (Math.ceil(Math.random() * 5) % 3 === 2 ? colors.success : colors.gray)
                 };
             })
 
@@ -385,12 +384,11 @@ const useAttendanceAdmin = () => {
                 return {
                     value: newValue,
                     label: `${day}`,
-                    frontColor: (Math.ceil(Math.random() * 5) % 3 === 2 ? colors.success : colors.gray)
                 };
             })
 
-            const filteredStaffCount = dailyAttender.filter(item => item.value !== undefined && item.label !== undefined && item.frontColor !== undefined);
-            const filteredStudentCount = dailyAttenderStdent.filter(item => item.value !== undefined && item.label !== undefined && item.frontColor !== undefined);
+            const filteredStaffCount = dailyAttender.filter(item => item.value !== undefined && item.label !== undefined);
+            const filteredStudentCount = dailyAttenderStdent.filter(item => item.value !== undefined && item.label !== undefined);
             setEverydayAttendanceStaff(filteredStaffCount)
             setEverydayAttendanceStudent(filteredStudentCount)
         }
@@ -424,7 +422,6 @@ const useAttendanceAdmin = () => {
                 return {
                     value: newValue,
                     label: `${everyMonth}`,
-                    frontColor: (Math.ceil(Math.random() * 5) % 3 === 2 ? colors.success : colors.gray)  // Ensure fontColor is of type ColorValue
                 };
 
             })
@@ -447,16 +444,15 @@ const useAttendanceAdmin = () => {
                 return {
                     value: newValue,
                     label: `${everyMonth}`,
-                    frontColor: (Math.ceil(Math.random() * 5) % 3 === 2 ? colors.success : colors.gray)  // Ensure fontColor is of type ColorValue
                 };
 
             })
 
 
-            const filteredStaffCount = monthlyAttendee.filter(item => item.value !== undefined && item.label !== undefined && item.frontColor !== undefined);
-            const filteredStudentCount = monthlyAttendeeStudent.filter(item => item.value !== undefined && item.label !== undefined && item.frontColor !== undefined);
+            const filteredStaffCount = monthlyAttendee.filter(item => item.value !== undefined && item.label !== undefined );
+            const filteredStudentCount = monthlyAttendeeStudent.filter(item => item.value !== undefined && item.label !== undefined);
             setEveryMonthStaff(filteredStaffCount)
-            setEveryMonthStudent(filteredStaffCount)
+            setEveryMonthStudent(filteredStudentCount)
         }
         getMonthlyAttendance()
     }, [attendance]);
